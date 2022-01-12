@@ -13,7 +13,7 @@ const DEBOUNCE_DELAY = 300;
 let name = '';
  */
 
-function fetchCountries(name) {
+/* function fetchCountries(name) {
   fetch(
     'https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags.svg,languages',
   )
@@ -21,4 +21,12 @@ function fetchCountries(name) {
     .then(console.log);
 }
 
-fetchCountries(usa);
+fetchCountries(); */
+
+fetch('https://restcountries.com/v3.1/name/usa')
+  .then(response => {
+    return response.json();
+  })
+  .then(name => {
+    console.log(name);
+  });
