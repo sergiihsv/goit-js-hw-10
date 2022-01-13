@@ -1,4 +1,5 @@
 import './css/styles.css';
+import fetchCountries from './fetchCountries';
 /* import { fetchCountries, countriesMarkup, countryMarkup } from './js/fetchCountries'; */
 import debounce from 'lodash.debounce';
 
@@ -6,27 +7,18 @@ import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 
-/* export const countriesMarkup = function (markup) {
-  document.querySelector('.country-list').innerHTML = markup;
-};
+const searchInput = document.querySelector('#search-box');
+searchInput.addEventListener('input', debounce(showCountries, DEBOUNCE_DELAY));
 
-let name = '';
- */
+fetchCountries();
 
-/* function fetchCountries(name) {
-  fetch(
-    'https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags.svg,languages',
-  )
-    .then(responce => responce.json())
-    .then(console.log);
+function markUp() {}
+
+function showCountries() {
+  if (searchInput.value.trim() === '') {
+    countriesMarkup(' ');
+    countryMarkup(' ');
+    return;
+  }
+  fetchCountries(searchInput.value.trim());
 }
-
-fetchCountries(); */
-
-fetch('https://restcountries.com/v3.1/name/usa')
-  .then(response => {
-    return response.json();
-  })
-  .then(name => {
-    console.log(name);
-  });
